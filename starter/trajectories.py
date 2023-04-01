@@ -75,7 +75,8 @@ def make_sphere_vis(model_strings):
 
         # Define the layout
         layout = go.Layout(scene=dict(xaxis_title='X', yaxis_title='Y', zaxis_title='Z'),
-                           margin=dict(l=0, r=0, b=0, t=0))
+                           margin=dict(l=0, r=0, b=0, t=0),
+                           legend_title_text='Select Paths')
 
         print('at: ', all_traces)
         # Create a figure and add the scatter plots
