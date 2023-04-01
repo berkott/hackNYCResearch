@@ -11,7 +11,7 @@ from datasets import load_dataset
 from transformers import GPTJForCausalLM, AutoTokenizer
 
 
-SUBSAMPLE_N = 10
+SUBSAMPLE_N = 1
 SAVEDIR = './data'
 
 def make_sphere_vis(model_strings):
@@ -76,7 +76,8 @@ def make_sphere_vis(model_strings):
         # Define the layout
         layout = go.Layout(scene=dict(xaxis_title='X', yaxis_title='Y', zaxis_title='Z'),
                            margin=dict(l=0, r=0, b=0, t=0),
-                           legend_title_text='Select Paths')
+                           legend_title_text='Select Paths',
+                           title='Mt Bruno Elevation')
 
         print('at: ', all_traces)
         # Create a figure and add the scatter plots
@@ -87,9 +88,9 @@ def make_sphere_vis(model_strings):
 
 def make_sphere_data(model_strings):
 
-    if os.path.exists('./data/figure_4_sphere_data.pkl'):
-        print('Found cached sphere data')
-        return
+    # if os.path.exists('./data/figure_4_sphere_data.pkl'):
+    #     print('Found cached sphere data')
+    #     return
 
     generations_by_model_string = {}
     pre_umap = []
@@ -99,6 +100,8 @@ def make_sphere_data(model_strings):
         with open('./data/' + save_string + '_fig4_embeddings.pkl', 'rb') as f:
             all_embs = pickle.load(f)
             for prompt in all_embs:
+                print(len(prompt))
+                print(len(prompt[0]))
                 for sequence in prompt:
                     sequence = np.squeeze(sequence)
                     sequence = np.stack(sequence).astype('float64')
