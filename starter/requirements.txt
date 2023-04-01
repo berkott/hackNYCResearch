@@ -1,0 +1,7 @@
+transformers
+datasets
+tqdm
+umap
+plotly
+accelerate
+umap-learn
